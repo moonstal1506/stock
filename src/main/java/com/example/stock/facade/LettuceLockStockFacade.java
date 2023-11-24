@@ -10,9 +10,12 @@ import com.example.stock.service.StockService;
 public class LettuceLockStockFacade {
 
 	/**
-	 * 구현 쉬움
-	 * 스핀락 방식 -> 레디스에 부하
+	 * [Lettuce]
+	 * 구현이 간단하다
+	 * spring data redis 를 이용하면 lettuce 가 기본이기때문에 별도의 라이브러리를 사용하지 않아도 된다.
+	 * spin lock 방식이기때문에 동시에 많은 스레드가 lock 획득 대기 상태라면 redis 에 부하가 갈 수 있다.
 	 * 쓰레드 슬립으로 락획득 재시도 텀을 둬야함
+	 * -> 재시도가 필요하지 않은 lock 은 lettuce 활용
 	 */
 
 	private final RedisLockRepository redisLockRepository;
